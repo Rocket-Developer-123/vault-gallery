@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Private Vault</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 1. MAGIC PASSWORD GATE -->
+  <div id="login-screen" class="screen">
+    <div class="card">
+      <h2>🔒 Vault Access</h2>
+      <p class="sub">Enter access code to continue</p>
+      <input type="password" id="magic-password" placeholder="Enter password..." autocomplete="off" />
+      <button id="login-btn">Enter</button>
+      <p id="login-error" class="error"></p>
+    </div>
+  </div>
+
+  <!-- 2. ADMIN PANEL (Shown ONLY if Admin Password was entered) -->
+  <div id="admin-screen" class="screen hidden">
+    <header>
+      <h3>👑 Admin Studio</h3>
+      <button class="logout-btn" onclick="logout()">Exit</button>
+    </header>
+
+    <div class="card">
+      <h4>Upload New Photo</h4>
+      <input type="text" id="photo-title" placeholder="Photo title or caption" />
+      <input type="file" id="photo-file" accept="image/*" />
+      
+      <label class="checkbox-row">
+        <input type="checkbox" id="is-private-check" />
+        <span>Lock with individual password</span>
+      </label>
+
+      <input type="password" id="private-photo-pass" class="hidden" placeholder="Set password for this photo" />
+      <button id="upload-btn">Upload Photo</button>
+      <p id="upload-status" class="status"></p>
+    </div>
+
+    <h4>Uploaded Photos</h4>
+    <div id="admin-photo-list" class="grid"></div>
+  </div>
+
+  <!-- 3. VIEWER GALLERY (Shown if Master Password was entered) -->
+  <div id="viewer-screen" class="screen hidden">
+    <header>
+      <h3>📸 Gallery</h3>
+      <button class="logout-btn" onclick="logout()">Lock</button>
+    </header>
+    <p class="hint-banner">Tap a card, then <strong>Press & Hold</strong> to peek.</p>
+    <div id="viewer-photo-list" class="grid"></div>
+  </div>
+
+  <!-- 4. PRIVATE PHOTO UNLOCK MODAL -->
+  <div id="unlock-modal" class="modal hidden">
+    <div class="card">
+      <h3 id="unlock-title">Private Photo</h3>
+      <p class="sub">Enter individual password</p>
+      <input type="password" id="unlock-pass-input" placeholder="Photo password..." />
+      <div class="row-btns">
+        <button class="secondary" onclick="closeUnlockModal()">Cancel</button>
+        <button id="confirm-unlock-btn">Unlock</button>
+      </div>
+      <p id="unlock-error" class="error"></p>
+    </div>
+  </div>
+
+  <!-- 5. SNAPCHAT-STYLE PRESS & HOLD VIEWER OVERLAY -->
+  <div id="hold-overlay" class="hold-overlay hidden">
+    <div id="hold-zone" class="hold-zone">
+      <div id="hold-prompt" class="hold-prompt">
+        <span>👆</span>
+        <p>PRESS & HOLD TO VIEW</p>
+        <small>Release or touch with 2nd finger to hide</small>
+      </div>
+      <canvas id="secure-canvas" class="hidden"></canvas>
+    </div>
+    <button class="close-overlay-btn" onclick="closeHoldOverlay()">✕ Close</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
