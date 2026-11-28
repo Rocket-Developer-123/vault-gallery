@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Vault</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="login" class="screen">
+    <h1>Vault</h1>
+    <input id="pw" type="password" placeholder="Password" autocomplete="off">
+    <button id="login-btn">Enter</button>
+    <p id="login-err" class="error"></p>
+  </main>
+
+  <main id="admin" class="screen hidden">
+    <header><h2>Admin</h2><button id="exit-admin" class="small">Exit</button></header>
+    <section class="card">
+      <input id="title" type="text" placeholder="Title">
+      <input id="file" type="file" accept="image/*">
+      <label class="row"><input id="private" type="checkbox"> Private, with its own password</label>
+      <div id="private-fields" class="hidden">
+        <input id="photo-pw" type="text" placeholder="Photo password">
+        <input id="hint" type="text" placeholder="Hint (optional)">
+      </div>
+      <label class="row"><input id="burn" type="checkbox"> Burn after one view</label>
+      <button id="upload-btn">Upload</button>
+      <p id="upload-msg" class="status"></p>
+    </section>
+    <div id="admin-list" class="grid"></div>
+  </main>
+
+  <main id="viewer" class="screen hidden">
+    <header><h2 id="hello">Gallery</h2><button id="exit-viewer" class="small">Lock</button></header>
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <div id="modal" class="overlay hidden">
+    <div class="card">
+      <h3 id="m-title"></h3>
+      <p id="m-note" class="sub"></p>
+      <input id="m-pw" type="password" placeholder="Photo password" autocomplete="off">
+      <div class="row">
+        <button id="m-cancel" class="secondary">Cancel</button>
+        <button id="m-ok">Open</button>
+      </div>
+      <p id="m-err" class="error"></p>
+    </div>
+  </div>
+
+  <div id="hold" class="overlay hidden">
+    <div id="zone">
+      <p id="prompt">Press and hold to view</p>
+      <canvas id="canvas" class="hidden"></canvas>
+    </div>
+    <button id="close-hold" class="secondary">Close</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
